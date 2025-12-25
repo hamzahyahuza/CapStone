@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Blog ✨</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Blog Header -->
+    <h1>✨ My Minimal Blog ✨</h1>
+
+    <!-- Form to Add New Post -->
+    <form id="postForm">
+      <input type="text" id="title" placeholder="Post Title 📝" required>
+      <textarea id="content" placeholder="Write something amazing... 💭" required></textarea>
+      <button type="submit">Add Post ➕</button>
+    </form>
+
+    <!-- Edit Form (Hidden by default) -->
+    <div id="editFormContainer">
+      <h3>✏️ Edit Post</h3>
+      <form id="editForm">
+        <input type="hidden" id="editId">
+        <input type="text" id="editTitle" placeholder="Post Title 📝">
+        <textarea id="editContent" placeholder="Update your thoughts... 💭"></textarea>
+        <button type="submit">Update ✅</button>
+        <button type="button" onclick="cancelEdit()">Cancel ❌</button>
+      </form>
+    </div>
+
+    <!-- Posts List -->
+    <h2>📚 Recent Posts</h2>
+    <div id="posts">
+      <% posts.forEach(post => { %>
+        <div class="post">
+          <h3><%= post.title %></h3>
+          <p><%= post.content %></p>
+          <div class="meta">
+            Posted on <%= new Date(post.createdAt).toLocaleDateString() %> at 
+            <%= new Date(post.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %>
+          </div>
+          <button onclick="editPost(<%= post.id %>, '<%- post.title %>', '<%- post.content %>')">✏️ Edit</button>
+          <button type="button" onclick="deletePost(<%= post.id %>)">🗑️ Delete</button>
+        </div>
+      <% }) %>
+    </div>
+
+  </div>
+  <script src="/script.js"></script>
+</body>
+<%- include("partials/footer.ejs") %>
+
+</html>
