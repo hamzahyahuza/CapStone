@@ -9,7 +9,6 @@ import { fileURLToPath } from "url"; // Needed to use __dirname in ES modules
 
 // 2. Setup app
 const app = express();
-const port = 3000;
 
 // Fix for __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -91,6 +90,9 @@ app.delete("/posts/:id", (req, res) => {
 // ---------------------------
 // Start server
 // ---------------------------
-app.listen(port, () => {
-  console.log(`✅ Server running at http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });
+
